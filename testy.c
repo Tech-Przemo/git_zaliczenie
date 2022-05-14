@@ -3,7 +3,6 @@
 #include "character_strings.h"
 #include "conversions.h"
 
-
 void TestOf_CopyString(void)
 {
     printf("CopyString \n\n");
