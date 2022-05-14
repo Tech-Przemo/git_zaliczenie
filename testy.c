@@ -38,8 +38,32 @@ void TestOf_CopyString(void)
         printf("ERROR\n");
 }
 
+void TestOf_eCompareString(void)
+{
+    printf("Test 1 -");
+    //Lancuchy takie same
+    char cStringToCompare_1[] = "ABCDE";
+    
+    if(eCompareString("ABCDE", cStringToCompare_1) == 0)
+        printf("EQUAL\n");
+    else
+        printf("DIFFERENT\n");
+
+    printf("Test 2 -");
+    //Lancuchy rozne
+    char cStringToCompare_2[] = "ABC";
+    
+    if(eCompareString("ABCDE", cStringToCompare_2) == 0)
+        printf("EQUAL\n");
+    else
+        printf("DIFFERENT\n");
+
+
+}
+
 
 int main(void)
 {
-    TestOf_CopyString();
+    //TestOf_CopyString();
+    TestOf_eCompareString();
 }
