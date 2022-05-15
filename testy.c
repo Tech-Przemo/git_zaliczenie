@@ -203,7 +203,28 @@ void TestOf_ReplaceCharactersInString(void)
     
     //POWODZENIE
 }
+
 //-------------------------------------------------------
+void TestOf_UIntToHexStr(void)
+{
+    printf("UIntToHexStr \n");
+
+    printf("Test 1 - ");
+    //Sprawdzenie poprawnosci dzialania funkcji
+    char cHexString[10];
+    UIntToHexStr(43981, cHexString);
+
+    if(strcmp(cHexString, "0xABCD") == 0)
+    {
+        printf("OK\n");
+        printf("UIntToHexString result: %s", cHexString);
+    }
+    else
+        printf("ERROR\n");
+    
+    //POWODZENIE
+}
+//---------------------------------
 
 int main(void)
 {
@@ -215,4 +236,5 @@ int main(void)
     // TestOf_ReplaceCharactersInString();
 
     //printf("TESTY FUNKCJI: KONWERSJE \n\n\n");
+    TestOf_UIntToHexStr();
 }
