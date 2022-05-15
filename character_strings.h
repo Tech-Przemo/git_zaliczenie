@@ -1,4 +1,4 @@
-enum CompResult {DIFFERENT, EQUAL};
+enum CompResult {EQUAL, DIFFERENT};
 
 void CopyString(char pcSource[], char pcDestination[]);
 enum CompResult eCompareString(char pcTab1[], char pcTab2[]);

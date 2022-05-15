@@ -57,13 +57,31 @@ void TestOf_eCompareString(void)
         printf("EQUAL\n");
     else
         printf("DIFFERENT\n");
+}
 
+void TestOf_AppendString(void)
+{
+    printf("Test 1 - ");
+    //Test poprawnosci dzialania funkcji
+    char cStringTab[] = {"ZZZ"};
+    char cCopy_StringTab[] = {"ZZZ"};
+    
+    
 
+    AppendString("XXX", cStringTab);
+
+    if(strcmp(cCopy_StringTab, cStringTab) == 0)
+        printf("ERROR\n");
+    else
+        printf("OK\n");
+        printf("AppendString result: %s", cStringTab); //cosik nie dziala
+        //zeby wyswietlic string uzywamy %s
 }
 
 
 int main(void)
 {
     //TestOf_CopyString();
-    TestOf_eCompareString();
+    //TestOf_eCompareString();
+    TestOf_AppendString();
 }
