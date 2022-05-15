@@ -48,7 +48,6 @@ void TestOf_CopyString(void)
         printf("ERROR\n\n");
 
     //POWODZENIE
-
 }
 
 //----------------------------------------------
@@ -124,7 +123,6 @@ void TestOf_AppendString(void)
     //Test poprawnosci dzialania funkcji 
     char cStringTab_Test1[] = {"ZZZ"};
     
-    
     AppendString("XXX", cStringTab_Test1);
 
     if(strcmp("ZZZXXX", cStringTab_Test1) == 0)
@@ -135,7 +133,6 @@ void TestOf_AppendString(void)
     else
         printf("ERROR\n");
         
-    
     printf("Test 2 - ");
     //Pierwszy lancuch pusty
     char cStringTab_Test2[] ={"XXX"};
@@ -217,14 +214,96 @@ void TestOf_UIntToHexStr(void)
     if(strcmp(cHexString, "0xABCD") == 0)
     {
         printf("OK\n");
-        printf("UIntToHexString result: %s", cHexString);
+        printf("UIntToHexString result: %s\n\n", cHexString);
     }
     else
         printf("ERROR\n");
     
     //POWODZENIE
 }
+
 //---------------------------------
+void TestOf_eHexStringToUInt(void)
+{
+    enum Result eReturnResult;
+    unsigned int uiValue;
+
+    printf("TestOf_eHexStringToUInt \n");
+
+    printf("Test 1 - ");
+    //Zamiana duzych liter
+    eReturnResult = eHexStringToUInt("0xABCD", &uiValue);
+
+    if(eReturnResult == OK)
+    {
+        printf("OK\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+    
+    printf("Test 2 - ");
+    //Zamiana malych liter
+     eReturnResult = eHexStringToUInt("0xabcd", &uiValue);
+
+     if(eReturnResult == ERROR)
+    {
+        printf("OK\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+
+    printf("Test 3 - ");
+    //lancuch za krotki
+     eReturnResult = eHexStringToUInt("0x", &uiValue);
+
+     if(eReturnResult == ERROR)
+    {
+        printf("OK\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+
+    printf("Test 4 - ");
+    //lancuch za dlugi
+     eReturnResult = eHexStringToUInt("0xABCDEFG", &uiValue);
+
+     if(eReturnResult == ERROR)
+    {
+        printf("OK\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+
+    printf("Test 5 - ");
+    //Zly format lancucha
+     eReturnResult = eHexStringToUInt("0zABCD", &uiValue);
+
+     if(eReturnResult == ERROR)
+    {
+        printf("OK\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+    
+    printf("Test 6 - ");
+    //mniejsza liczba w lancuchu
+     eReturnResult = eHexStringToUInt("0x3", &uiValue);
+
+     if(eReturnResult == OK)
+    {
+        printf("OK\n\n");
+        uiValue = 0;
+    }
+    else
+        printf("ERROR\n");
+    
+    //POWODZENIE
+}
 
 int main(void)
 {
@@ -236,5 +315,6 @@ int main(void)
     // TestOf_ReplaceCharactersInString();
 
     //printf("TESTY FUNKCJI: KONWERSJE \n\n\n");
-    TestOf_UIntToHexStr();
+    //TestOf_UIntToHexStr();
+    //TestOf_eHexStringToUInt();
 }
