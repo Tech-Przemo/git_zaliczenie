@@ -305,6 +305,58 @@ void TestOf_eHexStringToUInt(void)
     //POWODZENIE
 }
 
+//-------------------------------------------------------
+void TestOf_AppendUIntToString(void)
+{
+    printf("TestOf_AppendUIntToString\n");
+
+    printf("Test 1 - ");
+    //Test poprawnosci dzialania funkcji
+    unsigned int uiNumber_Test1 = 43981;
+    char cString_Test1[] = {"test"};
+    AppendUIntToString(uiNumber_Test1, cString_Test1);
+
+    if(strcmp(cString_Test1, "test0xABCD") == 0)
+        printf("OK\n");
+    else
+        printf("ERROR\n");
+    
+    printf("Test 2 - ");
+    //Pusty String
+    unsigned int uiNumber_Test2 = 43981;
+    char cString_Test2[] = {""};
+    AppendUIntToString(uiNumber_Test2, cString_Test2);
+
+    if(strcmp(cString_Test2, "0xABCD") == 0)
+        printf("OK\n");
+    else
+        printf("ERROR\n");
+    
+    printf("Test 3 - ");
+    //Liczba 0 przy niepustym stringu
+    unsigned int uiNumber_Test3 = 0;
+    char cString_Test3[] = {"test"};
+    AppendUIntToString(uiNumber_Test3, cString_Test3);
+
+    if(strcmp(cString_Test3, "test0x0000") == 0)
+        printf("OK\n");
+    else
+        printf("ERROR\n");
+
+    printf("Test 4 - ");
+    //Liczba 0 przy pustym stringu
+    unsigned int uiNumber_Test4 = 0;
+    char cString_Test4[] = {""};
+    AppendUIntToString(uiNumber_Test4, cString_Test4);
+    
+    if(strcmp(cString_Test4, "0x0000") == 0)
+        printf("OK\n");
+    else
+        printf("ERROR\n");
+    
+    //POWODZENIE
+}
+
 int main(void)
 {
     //printf("TESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
@@ -317,4 +369,5 @@ int main(void)
     //printf("TESTY FUNKCJI: KONWERSJE \n\n\n");
     //TestOf_UIntToHexStr();
     //TestOf_eHexStringToUInt();
+    TestOf_AppendUIntToString();
 }
