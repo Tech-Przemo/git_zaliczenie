@@ -359,15 +359,15 @@ void TestOf_AppendUIntToString(void)
 
 int main(void)
 {
-    //printf("TESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
+    printf("\nTESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
 
-    // TestOf_CopyString();
-    // TestOf_eCompareString();
-    // TestOf_AppendString();
-    // TestOf_ReplaceCharactersInString();
+    TestOf_CopyString();
+    TestOf_eCompareString();
+    TestOf_AppendString();
+    TestOf_ReplaceCharactersInString();
 
-    //printf("TESTY FUNKCJI: KONWERSJE \n\n\n");
-    //TestOf_UIntToHexStr();
-    //TestOf_eHexStringToUInt();
+    printf("\n\nTESTY FUNKCJI: KONWERSJE \n\n\n");
+    TestOf_UIntToHexStr();
+    TestOf_eHexStringToUInt();
     TestOf_AppendUIntToString();
 }
