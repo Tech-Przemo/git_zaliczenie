@@ -5,7 +5,7 @@
 
 void TestOf_CopyString(void)
 {
-    printf("CopyString \n\n");
+    printf("CopyString \n");
 
     printf("Test 1 - ");
     //Czy funkcja dziala (pierwszy krotszy, drugi dluzszy)
@@ -43,9 +43,9 @@ void TestOf_CopyString(void)
     CopyString(" ", cAfterCopy_4);
 
     if(strcmp(" ", cAfterCopy_4) == 0)
-        printf("OK\n");
+        printf("OK\n\n");
     else
-        printf("ERROR\n");
+        printf("ERROR\n\n");
 
     //POWODZENIE
 
@@ -54,6 +54,8 @@ void TestOf_CopyString(void)
 //----------------------------------------------
 void TestOf_eCompareString(void)
 {
+    printf("eCompareString \n");
+
     printf("Test 1 -");
     //Lancuchy takie same
     
@@ -106,7 +108,7 @@ void TestOf_eCompareString(void)
     //Oba lancuchy puste
     
     if(eCompareString(" ", " ") == 0)
-        printf("EQUAL\n");
+        printf("EQUAL\n\n");
     else
         printf("DIFFERENT\n");
 
@@ -116,6 +118,8 @@ void TestOf_eCompareString(void)
 //------------------------------------------
 void TestOf_AppendString(void)
 {
+    printf("AppendString \n");
+
     printf("Test 1 - ");
     //Test poprawnosci dzialania funkcji 
     char cStringTab_Test1[] = {"ZZZ"};
@@ -124,8 +128,10 @@ void TestOf_AppendString(void)
     AppendString("XXX", cStringTab_Test1);
 
     if(strcmp("ZZZXXX", cStringTab_Test1) == 0)
+    {
         printf("OK\n");
-        //printf("AppendString result Test_1: %s\n", cStringTab_Test1);  //zeby wyswietlic string uzywamy %s
+        printf("AppendString result Test_1: %s\n", cStringTab_Test1);  //zeby wyswietlic string uzywamy %s
+    }
     else
         printf("ERROR\n");
         
@@ -137,10 +143,13 @@ void TestOf_AppendString(void)
     AppendString("", cStringTab_Test2);
 
     if(strcmp("XXX", cStringTab_Test2) == 0)
+    {
         printf("OK\n");
+        printf("AppendString result Test_2: %s\n", cStringTab_Test2);
+    } 
     else
         printf("ERROR\n");
-        //printf("AppendString result Test_2: %s\n", cStringTab_Test2); 
+        
 
     printf("Test 3 - ");
     //Drugi lancuch pusty
@@ -149,10 +158,13 @@ void TestOf_AppendString(void)
     AppendString("XXYYZZ", cStringTab_Test3);
 
     if(strcmp("XXYYZZ", cStringTab_Test3) == 0)
+    {
         printf("OK\n");
+         printf("AppendString result Test_3: %s\n\n", cStringTab_Test3); 
+    }
     else
-        printf("ERROR\n");
-        //printf("AppendString result Test_3: %s\n", cStringTab_Test3); 
+        printf("ERROR\n\n");
+       
     
     //POWODZENIE
 }
@@ -160,16 +172,21 @@ void TestOf_AppendString(void)
 //----------------------------------------
 void TestOf_ReplaceCharactersInString(void)
 {
+    printf("ReplaceCharactersInString \n");
+
     printf("Test 1 - ");
     //Test poprawnosci dzialania funkcji -> rozne znaki
     char cString_Test1[] = {"XXXX"};
     ReplaceCharactersInString(cString_Test1, 'X', 'Z');
     
     if(strcmp(cString_Test1, "ZZZZ") == 0)
+    {
         printf("OK\n");
+        printf("ReplaceCharactersInString result Test_1: %s\n", cString_Test1);
+    }
     else
         printf("ERROR\n");
-        //printf("ReplaceCharactersInString result: %s\n", cString);
+        
     
     printf("Test 2 - ");
     //Spacja na NULL
@@ -177,9 +194,12 @@ void TestOf_ReplaceCharactersInString(void)
     ReplaceCharactersInString(cString_Test2, ' ', '\0');
     
     if(strcmp(cString_Test2, "Znaki\0do\0zmiany") == 0)
+    {
         printf("OK\n");
+        printf("ReplaceCharactersInString result Test_2: %s\n", cString_Test2);
+    }
     else
-        printf("ERROR\n");
+        printf("ERROR\n\n");
     
     //POWODZENIE
 }
@@ -189,8 +209,10 @@ int main(void)
 {
     //printf("TESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
 
-    //TestOf_CopyString();
-    //TestOf_eCompareString();
-    //TestOf_AppendString();
-    //TestOf_ReplaceCharactersInString();
+    // TestOf_CopyString();
+    // TestOf_eCompareString();
+    // TestOf_AppendString();
+    // TestOf_ReplaceCharactersInString();
+
+    //printf("TESTY FUNKCJI: KONWERSJE \n\n\n");
 }
