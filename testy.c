@@ -180,8 +180,10 @@ void TestOf_ReplaceCharactersInString(void)
         printf("OK\n");
     else
         printf("ERROR\n");
+    
+    //POWODZENIE
 }
-
+//-------------------------------------------------------
 
 int main(void)
 {
