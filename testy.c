@@ -8,17 +8,6 @@
 
 extern Token sToken[MAX_TOKEN_NR];
 
-unsigned char ucTokenNrToken;
-
-void printToken() {
-  printf("Token number: %d\n", ucTokenNrToken);
-  for(int i=0 ; i < MAX_TOKEN_NR; i++){
-    char* takenValue = sToken[i].uValue.pcString;
-    printf("Token nr %d = %s\n", i, takenValue);
-  }
-  printf("----\n");
-}
-
 void TestOf_CopyString(void)
 {
     printf("CopyString \n");
