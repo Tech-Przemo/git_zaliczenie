@@ -2,6 +2,22 @@
 #include <string.h>
 #include "character_strings.h"
 #include "conversions.h"
+#include "decode.h"
+
+#define MAX_TOKEN_NR 3
+
+extern Token sToken[MAX_TOKEN_NR];
+
+unsigned char ucTokenNrToken;
+
+void printToken() {
+  printf("Token number: %d\n", ucTokenNrToken);
+  for(int i=0 ; i < MAX_TOKEN_NR; i++){
+    char* takenValue = sToken[i].uValue.pcString;
+    printf("Token nr %d = %s\n", i, takenValue);
+  }
+  printf("----\n");
+}
 
 void TestOf_CopyString(void)
 {
@@ -201,7 +217,8 @@ void TestOf_ReplaceCharactersInString(void)
     //POWODZENIE
 }
 
-//-------------------------------------------------------
+
+//----------------------------KONWERSJE------------------------------------------------
 void TestOf_UIntToHexStr(void)
 {
     printf("UIntToHexStr \n");
@@ -357,17 +374,188 @@ void TestOf_AppendUIntToString(void)
     //POWODZENIE
 }
 
+//--------------------------------DEKODOWANIE------------------------------------
+void TestOf_ucFindTokensInString(void)
+{
+    unsigned int uiTokenNumber; //Zmienna pomocnicza
+    
+    printf("TestOf_ucFindTokensInString\n");
+
+    printf("Test 1 - ");
+    //Tylko delimitery -> test odpornosci funkcji
+    uiTokenNumber = ucFindTokenInString("   ");
+    if(uiTokenNumber == 0)
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+
+    printf("Test 2 - ");
+    //Delimitery przed pierwszym tokenem
+   uiTokenNumber = ucFindTokenInString("  load 0x12 eax");
+    if(uiTokenNumber == 3)
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+
+    printf("Test 3 - ");
+    //Wiecej niz jeden delimiter pomiędzy tokenami
+    uiTokenNumber = ucFindTokenInString("load  0x12  eax");
+    if(uiTokenNumber == 3)
+    {
+        printf("OK\n");
+        uiTokenNumber = 0;
+    }
+    else
+    {
+        printf("ERROR\n");
+        
+    }
+
+    printf("Test 4 - ");
+    //Delimitery przed pierwszym tokenem i mniej tokenow niz MAX
+    uiTokenNumber = ucFindTokenInString("  load 0x12");
+    if(uiTokenNumber == 2)
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+
+    printf("Test 5 - ");
+    //Zbyt duza ilosc tokenow i ustawienie wskaznikow na poczatki 3 pierwszych tokenow 
+    
+    char cTestString[] = {"load 0x45 ABCDE eax"}; 
+    uiTokenNumber = ucFindTokenInString(cTestString);
+    if((uiTokenNumber == 3) && (&cTestString[0] == sToken[0].uValue.pcString) && (&cTestString[5] == sToken[1].uValue.pcString) 
+    && (&cTestString[10] == sToken[2].uValue.pcString))
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    
+    }
+
+    printf("Test 6 - ");
+    //Poprawny lancuch do dekodowania
+    uiTokenNumber = ucFindTokenInString("reset 0x123 eax");
+    if(uiTokenNumber == 3) 
+    {
+        printf("OK\n\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+}
+
+//------------------------------------------------------------------
+void TestOf_eStringToKeyword(void)
+{
+    enum KeywordCode eTokenCode;
+    printf("TestOf_eStringToKeyword\n");
+
+    printf("Test 1 - ");
+    //rozpoznanie slowa kluczowego w stringu - poprawne slowo kluczowe
+    if(eStringToKeyword("load", &eTokenCode) == OK) //jako lancuch wystarczy tylko kod slowa kluczowego
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+
+    printf("Test 2 - ");
+    //rozpoznanie slowa kluczowego w stringu - niepoprawne slowo
+    if(eStringToKeyword("brum", &eTokenCode) == ERROR)
+    {
+        printf("OK\n\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+}
+
+//------------NIE DZIALA--------------------------
+void TestOf_DecodeTokens(void)
+{
+    unsigned char ucTokenNumber;
+    char cTestDecode[] = {"reset 0x45 abc"};
+    printf("DecodeTokens\n");
+
+    printf("Test 1 - ");
+    //Zdekodowanie tokenu -> keyword i zapis kodu, liczba i jej zapis, string i ustawienie wskaznika na jego poczatek
+    ucTokenNumber = ucFindTokenInString(cTestDecode);
+    ReplaceCharactersInString(cTestDecode, ' ', NULL);
+    DecodeTokens();
+    if((ucTokenNumber == 3) && (sToken[0].eType == KEYWORD) && (sToken[0].uValue.eKeyword == RST)
+    && (sToken[1].eType == NUMBER) && (sToken[1].uValue.uiNumber == 0x45)
+    && (sToken[2].eType == STRING) && (sToken[2].uValue.pcString == &cTestDecode[11]))
+    {
+        printf("OK\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+}
+
+//---------------NIE DZIALA---------------------------------
+void TestOf_DecodeMsg(void)
+{
+    char cStringToDecode[] = {"load 0x12 eax"};
+
+    printf("DecodeMsg\n");
+
+    printf("Test 1 - ");
+    //keyword, liczba, string 
+    DecodeMsg(cStringToDecode);
+    if((sToken[0].eType == KEYWORD) && (sToken[0].uValue.eKeyword == LD)
+    && (sToken[1].eType == NUMBER) && (sToken[1].uValue.uiNumber == 0x12)
+    && (sToken[2].eType == STRING) && (strcmp("eax", sToken[2].uValue.pcString) == 0))
+    {
+        printf("OK\n\n");
+    }
+    else
+    {
+        printf("ERROR\n");
+    }
+}
+
+
+
 int main(void)
 {
-    printf("\nTESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
+    // printf("\nTESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
 
-    TestOf_CopyString();
-    TestOf_eCompareString();
-    TestOf_AppendString();
-    TestOf_ReplaceCharactersInString();
+    // TestOf_CopyString();
+    // TestOf_eCompareString();
+    // TestOf_AppendString();
+    // TestOf_ReplaceCharactersInString();
 
-    printf("\n\nTESTY FUNKCJI: KONWERSJE \n\n\n");
-    TestOf_UIntToHexStr();
-    TestOf_eHexStringToUInt();
-    TestOf_AppendUIntToString();
+    // printf("\n\nTESTY FUNKCJI: KONWERSJE \n\n\n");
+    
+    // TestOf_UIntToHexStr();
+    // TestOf_eHexStringToUInt();
+    // TestOf_AppendUIntToString();
+
+    printf("\n\nTESTY FUNKCJI: DEKODOWANIE \n\n\n");
+    
+    //TestOf_ucFindTokensInString();
+    // TestOf_eStringToKeyword();
+    TestOf_DecodeTokens();
+    TestOf_DecodeMsg();
 }
