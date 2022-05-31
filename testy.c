@@ -539,23 +539,23 @@ void TestOf_DecodeMsg(void)
 
 int main(void)
 {
-    // printf("\nTESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
+    printf("\nTESTY FUNKCJI DO OPERACJI NA STRINGACH \n\n\n");
 
-    // TestOf_CopyString();
-    // TestOf_eCompareString();
-    // TestOf_AppendString();
-    // TestOf_ReplaceCharactersInString();
+    TestOf_CopyString();
+    TestOf_eCompareString();
+    TestOf_AppendString();
+    TestOf_ReplaceCharactersInString();
 
-    // printf("\n\nTESTY FUNKCJI: KONWERSJE \n\n\n");
+    printf("\n\nTESTY FUNKCJI: KONWERSJE \n\n\n");
     
-    // TestOf_UIntToHexStr();
-    // TestOf_eHexStringToUInt();
-    // TestOf_AppendUIntToString();
+    TestOf_UIntToHexStr();
+    TestOf_eHexStringToUInt();
+    TestOf_AppendUIntToString();
 
     printf("\n\nTESTY FUNKCJI: DEKODOWANIE \n\n\n");
     
-    //TestOf_ucFindTokensInString();
-    // TestOf_eStringToKeyword();
+    TestOf_ucFindTokensInString();
+    TestOf_eStringToKeyword();
     TestOf_DecodeTokens();
     TestOf_DecodeMsg();
 }
